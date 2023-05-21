@@ -20,6 +20,11 @@ if [ ! -f "./Makefile" ]; then
 	exit 1
 fi
 
+# Copy the templates directory to /usr/local/share/CBuildTool
+echo -e "${BLUE}Copying the templates directory to /usr/local/share/CBuildTool...${NC}"
+sudo mkdir -p /usr/local/share/CBuildTool
+sudo cp -r templates /usr/local/share/CBuildTool
+
 # Use the make command to build the executable
 echo -e "${BLUE}Building cbt...${NC}"
 make

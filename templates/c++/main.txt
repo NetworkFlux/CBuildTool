@@ -1,0 +1,9 @@
+#include "project.h"	// This line will always be correctly setup, no need to change it.
+
+int	main(int argc, char **argv)
+{
+	(void)argc;
+	(void)argv;
+	std::cout << "Hello World!" << std::endl;
+	return (0);
+}
