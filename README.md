@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This tool is designed to streamline the process of setting up new C projects by automatically generating the basic necessary files for you. The architecture of the generated project includes three root folders: `src`, `include`, and `obj` (which is created at compilation). It also includes a ready-to-go `Makefile`. The `src` folder contains a basic `main.c/cpp` file, while the `include` folder holds a basic `.h/hpp` file.
+This tool is designed to streamline the process of setting up new C/C++ projects by automatically generating the basic necessary files for you. The architecture of the generated project includes three root folders: `src`, `include`, and `obj` (which is created at compilation). It also includes a ready-to-go `Makefile`. The `src` folder contains a basic `main.c/cpp` file, while the `include` folder holds a basic `.h/hpp` file.
 
 With just one command, you can set up an entire C/C++ project. The included Bash script generates an executable that is moved to the `/usr/local/bin` folder, enabling you to initiate new projects from anywhere on your machine.
 
@@ -34,13 +34,13 @@ Another Note: The generated files will match the files in the `templates` folder
 
 ## Usage
 
-Once installed, you can create a new C project using the following command:
+Once installed, you can create a new C/C++ project using the following command:
 
 ```bash
 cbt
 ```
 
-You will be prompted to enter a project name, and a project with the aforementioned architecture will be generated, ready to go.
+You will be prompted to enter a project name and select your desired language, and a project with the aforementioned architecture will be generated, ready to go.
 
 Feel free to report any bugs or possible imporvements.
 
