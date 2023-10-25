@@ -1,0 +1,13 @@
+[
+ {
+  "directory": "/path/to/your/project",
+  "command": "clang -Wall -Wextra -Werror -Iinclude -c -o obj/main.o src/main.c",
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/path/to/your/project",
+  "command": "clang -Wall -Wextra -Werror -Iinclude -c -o obj/ft_ping.o src/ft_ping.c",
+  "file": "src/ft_ping.c"
+ }
+]
+

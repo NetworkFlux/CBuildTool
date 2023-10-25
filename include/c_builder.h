@@ -23,9 +23,27 @@
 #define COLOR_CYAN		"\x1b[36m"
 #define COLOR_RESET		"\x1b[0m"
 
+// PROJECT INFORMATION
+typedef struct project_s
+{
+    char    *name;
+    char    *path;
+}   project_t;
+
+// PROJECT HANDELING
+project_t   *create_project(void);
+void        delete_project(project_t *project);
+
 // File handling
-int fill_project(char *pro_path, char *pro_name, int lang);
-void copy_file_content(FILE *fd, const char *input_file, const char *project_name, int lang);
+int     fill_project(project_t *project);
+void    copy_file_content(FILE *fd, const char *input_file, const char *project_name);
 
 // Error handling
 void	err_n_die(const char *msg, ...);
+
+
+
+
+
+
+
