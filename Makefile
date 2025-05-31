@@ -40,12 +40,12 @@ $(FLUX_LIB):
 	@$(MAKE) -C $(FLUX_DIR)
 
 clean:
-	@echo "🧹 Cleaning object files..."
+	@echo " �Cleaning object files..."
 	@$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(FLUX_DIR) clean
 
 fclean: clean
-	@echo "🧹 Cleaning binary and libraries..."
+	@echo " �Cleaning binary and libraries..."
 	@$(RM) $(BIN_DIR)
 	@$(MAKE) -C $(FLUX_DIR) fclean
 
