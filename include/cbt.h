@@ -6,13 +6,8 @@
 
 #include "cbt_portability.h"
 
+#include "flux.h"
+
 #define PATH_SIZE 512
-
-typedef struct {
-    char    *user_path;
-    int     custom;
-} Path;
-
-Path    *init_path(void);
 
 #endif  // CBT_H

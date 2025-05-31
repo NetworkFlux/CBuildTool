@@ -1,6 +1,4 @@
 #include "cbt.h"
-#include "cbt_portability.h"
-#include "flux.h"
 
 #define SRC_PATH "cbt_src"
 #define MAIN_PATH SRC_PATH "/main.c"
@@ -45,25 +43,25 @@ void    create_file(const char *pathname, const char *file)
 
 void    create_project_structure(Path *path)
 {
-    if (path->custom == 1)
-        create_directory(path->user_path, NULL);
+    if (path->is_default == FALSE)
+        create_directory(path->path, NULL);
 
-    create_directory(path->user_path, SRC_PATH);
-    create_file(path->user_path, MAIN_PATH);
-    create_directory(path->user_path, INCLUDE_PATH);
-    create_file(path->user_path, DOTH_PATH);
-    create_file(path->user_path, MAKEFILE_PATH);
+    create_directory(path->path, SRC_PATH);
+    create_file(path->path, MAIN_PATH);
+    create_directory(path->path, INCLUDE_PATH);
+    create_file(path->path, DOTH_PATH);
+    create_file(path->path, MAKEFILE_PATH);
 }
 
 void    fill_project_files(Path *path)
 {
     char    fullpath[PATH_SIZE];
 
-    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->user_path, MAIN_PATH);
+    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->path, MAIN_PATH);
     copy_file(MAIN_TEMPLATE, fullpath);
-    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->user_path, DOTH_PATH);
+    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->path, DOTH_PATH);
     copy_file(DOTH_TEMPLATE, fullpath);
-    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->user_path, MAKEFILE_PATH);
+    snprintf(fullpath, sizeof(fullpath), "%s/%s", path->path, MAKEFILE_PATH);
     copy_file(MAKEFILE_TEMPLATE, fullpath);
 }
 
@@ -74,21 +72,21 @@ void    init_cbt_project(char *pathname)
     path = init_path();
     if (pathname)
     {
-        path->user_path = strdup(pathname);
-        path->custom = 1;
+        path->path = strdup(pathname);
+        path->is_default = FALSE;
     }
     create_project_structure(path);
     fill_project_files(path);
 
-    free(path->user_path);
-    free(path);
+    destroy_path(path);
+
+    printf("Project successfully initialized!\n");
 }
 
 int main(int argc, char **argv)
 {
     if (argc > 1)
     {
-        // One program argument
         if (strcmp(argv[1], "init") == 0)
         {
             if (argc == 2)
