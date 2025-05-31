@@ -1,3 +1,6 @@
+# Root Makefile
+MAKEFLAGS += --no-print-directory
+
 EXEC = cbt
 
 CC = gcc
@@ -5,35 +8,47 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 BIN_DIR = bin
-INC_DIR = include
-SRC_DIR = src
 OBJ_DIR = obj
-# LIB_DIR = lib_directory
+INC_DIR = include
 
+FLUX_DIR = fluxlib
+FLUX_INC = $(FLUX_DIR)/include
+FLUX_LIB = $(FLUX_DIR)/libflux.a
+
+SRC_DIR = src
 SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-# LIB = $(LIB_DIR)/your_lib.a
-LIBS = -lncurses
+INCLUDES = -I$(INC_DIR) -I$(FLUX_INC)
 
-all: $(EXEC)
+all: $(FLUX_LIB) $(EXEC)
 
-$(EXEC): $(OBJ) $(LIB)
-	@$(CC) $(CFLAGS) $(OBJ) -I $(INC_DIR) $(LIBS) -o $@
+$(EXEC): $(OBJ)
+	@echo "🔧 Linking final executable..."
+	@$(CC) $(CFLAGS) $(OBJ) -L$(FLUX_DIR) -lflux $(INCLUDES) -o $(EXEC)
 	@mkdir -p $(BIN_DIR)
 	@mv $(EXEC) $(BIN_DIR)/$(EXEC)
+	@echo "✅ Built executable moved to $(BIN_DIR)/$(EXEC)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo "🧩 Compiling $< -> $@"
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-#$(LIB):
-#	@$(MAKE) -C $(LIB_DIR)	(if a lib needs to be compiled)
+$(FLUX_LIB):
+	@echo "📦 Building fluxlib static library..."
+	@$(MAKE) -C $(FLUX_DIR)
 
 clean:
+	@echo "🧹 Cleaning object files..."
 	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C $(FLUX_DIR) clean
 
 fclean: clean
+	@echo "🧹 Cleaning binary and libraries..."
 	@$(RM) $(BIN_DIR)
+	@$(MAKE) -C $(FLUX_DIR) fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re
