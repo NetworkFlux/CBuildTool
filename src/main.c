@@ -1,10 +1,11 @@
 #include "cbt.h"
 
-#define SRC_PATH "cbt_src"
+#define SRC_PATH "src"
 #define MAIN_PATH SRC_PATH "/main.c"
-#define INCLUDE_PATH "cbt_include"
+#define INCLUDE_PATH "include"
 #define DOTH_PATH INCLUDE_PATH "/project.h"
-#define MAKEFILE_PATH "cbt_Makefile"
+#define MAKEFILE_PATH "Makefile"
+#define DOTCBT_PATH ".cbt"
 
 #define MAIN_TEMPLATE "templates/default/main.c.cbt"
 #define DOTH_TEMPLATE "templates/default/project.h.cbt"
@@ -51,6 +52,7 @@ void    create_project_structure(Path *path)
     create_directory(path->path, INCLUDE_PATH);
     create_file(path->path, DOTH_PATH);
     create_file(path->path, MAKEFILE_PATH);
+    create_file(path->path, DOTCBT_PATH);
 }
 
 void    fill_project_files(Path *path)
@@ -75,6 +77,13 @@ void    init_cbt_project(char *pathname)
         path->path = strdup(pathname);
         path->is_default = FALSE;
     }
+    
+    if (file_exists_in_path(path->path, ".cbt"))
+    {
+        printf("Project already initialized!\n");
+        return ;
+    }
+
     create_project_structure(path);
     fill_project_files(path);
 
