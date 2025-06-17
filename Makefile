@@ -11,7 +11,7 @@ BIN_DIR = bin
 OBJ_DIR = obj
 INC_DIR = include
 
-FLUX_DIR = fluxlib
+FLUX_DIR = libflux
 FLUX_INC = $(FLUX_DIR)/include
 FLUX_LIB = $(FLUX_DIR)/libflux.a
 
