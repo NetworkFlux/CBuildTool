@@ -3,7 +3,13 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/stat.h>
+# include <errno.h>
+# include <fcntl.h>
 # include "flux.h"
+
+# define SRC_DIR "cbt_src"
+# define INCLUDE_DIR "cbt_include"
 
 # define PATH_LEN 1024
 
