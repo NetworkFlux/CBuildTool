@@ -8,8 +8,11 @@
 # include <fcntl.h>
 # include "flux.h"
 
-# define SRC_DIR "cbt_src"
-# define INCLUDE_DIR "cbt_include"
+# define SRC_DIR "src"
+# define INCLUDE_DIR "include"
+# define MAIN_TEMPLATE "/usr/local/share/CBuildTool/templates/default/main.c.cbt"
+# define DOTH_TEMPLATE "/usr/local/share/CBuildTool/templates/default/project.h.cbt"
+# define MAKEFILE_TEMPLATE "/usr/local/share/CBuildTool/templates/default/Makefile.cbt"
 
 # define PATH_LEN 1024
 
